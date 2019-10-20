@@ -1,4 +1,22 @@
 {
+  "name": "ok",
+  "description": "A module that sticks togetheer some modules i like to use for front end apps.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichoth/ok.git"
+  },
+  "author": "Nick Thomas <nichoth@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nichoth/ok/issues"
+  },
+  "homepage": "https://github.com/nichoth/ok#readme",
   "engines": {
     "npm": "^5.0.0",
     "node": "^8.0.0"
@@ -11,12 +29,10 @@
     }
   },
   "scripts": {
-    "start": "node-sass src/style/main.scss --source-map-embed > public/style.css && concurrently --kill-others \"npm run serve\" \"npm run sass-watch\"",
+    "start": "concurrently --kill-others \"npm run serve\" \"npm run sass-watch\"",
     "serve": "env $(cat .env | xargs) budo src/index.js:bundle.js --pushstate --dir=public --live -- -t babelify -g aliasify -t [ envify --NODE_ENV development ] -dv",
     "build": "npm run build-js && npm run build-css",
     "build-js": "browserify -p bundle-collapser/plugin src/index.js -t babelify -t [ envify --NODE_ENV production ] -g aliasify -g unassertify | uglifyjs -mc > public/bundle.js",
-    "build-css": "node-sass --output-style=compressed src/style/main.scss > public/style.css",
-    "sass-watch": "node-sass --watch src/style/main.scss --source-map-embed public/style.css",
     "prepush": "./test/githook/prepush.sh",
     "preversion": "npm run lint && npm test",
     "postversion": "git push --no-verify && git push --tags --no-verify",
@@ -25,17 +41,18 @@
     "test-browser": "browserify test-browser/index.js | htmlify test-browser/index.html | tape-run --input html"
   },
   "dependencies": {
-    "@babel/preset-env": "^7.2.3",
-    "@babel/preset-react": "^7.0.0",
-    "@nichoth/catch-routes": "^1.0.2",
-    "@nichoth/events": "^1.1.1",
-    "@nichoth/observ": "^0.9.6",
-    "@nichoth/preact-connect": "^1.0.0",
+    "@nichoth/catch-routes": "^1.0.3",
+    "@nichoth/events": "^1.1.2",
+    "@nichoth/preact-connect": "^1.1.0",
+    "observ": "^0.2.0",
+    "observ-struct": "^6.0.0",
     "preact": "^8.2.9",
     "preact-compat": "^3.18.0",
     "ruta3": "^2.0.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-react-jsx": "^7.2.0",
     "aliasify": "^2.1.0",
@@ -57,6 +74,5 @@
     "tape-run": "^4.0.0",
     "uglify-js": "^3.3.25",
     "unassertify": "^2.1.1"
-  },
-  "private": true
+  }
 }

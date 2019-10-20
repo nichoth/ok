@@ -1,8 +1,11 @@
-# template preact routes
-A template for frontend applications that shows client side routing and DOM events
-
-The build process and development scripts are based on budo and browserify. CSS is done with `node-sass`.
+# ok
+A module that sticks togetheer some modules i like to use for front end apps.
 
 ## install
-Clone then change the git origin
+
+```
+npm install @nichoth/ok
+```
+
+## example
 
