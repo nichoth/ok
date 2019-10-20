@@ -18,7 +18,7 @@ function subscribe({ state, view }) {
     view.on(EVENTS.hello.world, () => state.foo.set('bar'))
 }
 
-ok(el, state, subscribe)
+var { bus } = ok(el, state, subscribe)
 
 if (process.env.NODE_ENV === 'development') {
     window.app = {
@@ -27,5 +27,3 @@ if (process.env.NODE_ENV === 'development') {
         EVENTS
     }
 }
-
-module.exports = start

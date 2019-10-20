@@ -30,14 +30,14 @@ var catchRoutes = require('@nichoth/catch-routes')
 //         evs
 //     }
 
-function start (el, state, subscribe) {
+function start (el, state, subscribe, view) {
     catchRoutes(function (parsedUrl) {
         state.route.set(parsedUrl)
     })
 
     var bus = Bus({ memo: true })
 
-    var _view = connect({ state, bus, view: View })
+    var _view = connect({ state, bus, view })
     subscribe({ view: bus, state })
     render(h(_view), el)
     return { state, view: bus }
