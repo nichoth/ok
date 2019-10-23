@@ -38,7 +38,7 @@
     "postversion": "git push --no-verify && git push --tags --no-verify",
     "lint": "eslint . --config .eslintrc",
     "test": "tape test/{**/*,*}.js",
-    "test-browser": "browserify test-browser/index.js | htmlify test-browser/index.html | tape-run --input html"
+    "test-browser": "browserify -t babelify test/index.js | htmlify test-browser/index.html | tape-run --input html | tap-spec"
   },
   "dependencies": {
     "@nichoth/catch-routes": "^1.0.3",
@@ -51,10 +51,10 @@
     "ruta3": "^2.0.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.2.3",
-    "@babel/preset-react": "^7.0.0",
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-react-jsx": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
     "aliasify": "^2.1.0",
     "babel-eslint": "^8.2.3",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -70,6 +70,7 @@
     "husky": "^0.14.3",
     "inline-htmlify": "^2.0.1",
     "node-sass": "^4.11.0",
+    "tap-spec": "^5.0.0",
     "tape": "^4.9.0",
     "tape-run": "^4.0.0",
     "uglify-js": "^3.3.25",

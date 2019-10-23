@@ -1,12 +1,9 @@
-// var { h, render } = require('preact')
-var ns = require('@nichoth/events/namespace')
-var ok = require('../')
-var struct = require('observ-struct')
-var observ = require('observ')
-
-var EVENTS = ns({
+var EVENTS = require('@nichoth/events/namespace')({
     hello: ['world']
 })
+var ok = require('../src')
+var struct = require('observ-struct')
+var observ = require('observ')
 
 var el = document.getElementById('content')
 var state = struct({
@@ -15,10 +12,10 @@ var state = struct({
 })
 
 function subscribe({ state, view }) {
-    view.on(EVENTS.hello.world, () => state.foo.set('bar'))
+    view.on(EVENTS.hello.world, () => state.foo.set('baz'))
 }
 
-var { bus } = ok(el, state, subscribe)
+var { bus } = ok(state, subscribe, view, el)
 
 if (process.env.NODE_ENV === 'development') {
     window.app = {

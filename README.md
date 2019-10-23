@@ -12,7 +12,6 @@ var ok = require('../')
 var ns = require('@nichoth/events/namespace')
 var struct = require('observ-struct')
 var observ = require('observ')
-
 var EVENTS = ns({
     hello: ['world']
 })
