@@ -37,8 +37,8 @@
     "preversion": "npm run lint && npm test",
     "postversion": "git push --no-verify && git push --tags --no-verify",
     "lint": "eslint . --config .eslintrc",
-    "test": "tape test/{**/*,*}.js",
-    "test-browser": "browserify -t babelify test/index.js | htmlify test-browser/index.html | tape-run --input html | tap-spec"
+    "test": "npm run test-browser",
+    "test-browser": "browserify test-browser/index.js | htmlify test-browser/index.html | tape-run --input html | tap-spec"
   },
   "dependencies": {
     "@nichoth/catch-routes": "^1.0.3",

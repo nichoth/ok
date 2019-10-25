@@ -1,6 +1,7 @@
 var EVENTS = require('@nichoth/events/namespace')({
     hello: ['world']
 })
+var { h } = require('preact')
 var ok = require('../src')
 var struct = require('observ-struct')
 var observ = require('observ')
@@ -11,16 +12,20 @@ var state = struct({
     route: struct({})  // required
 })
 
-function subscribe({ state, view }) {
-    view.on(EVENTS.hello.world, () => state.foo.set('baz'))
+function subscribe({ state, bus }) {
+    bus.on(EVENTS.hello.world, () => state.foo.set('baz'))
 }
 
-var { bus } = ok(state, subscribe, view, el)
+function view (props) {
+    var { emit } = props
+    return <div>hello</div>
+}
+
+var { bus } = ok(state, view, el)
+
+// @TODO need to pass in the bus
+subscribe({ state, bus })
 
 if (process.env.NODE_ENV === 'development') {
-    window.app = {
-        state,
-        view: bus,
-        EVENTS
-    }
+    window.app = { state, bus, EVENTS }
 }
