@@ -1,7 +1,7 @@
 {
   "name": "@nichoth/ok",
   "description": "A module that sticks togetheer some modules i like to use for front end apps.",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "index.js",
   "directories": {
     "example": "example",
