@@ -18,14 +18,17 @@ function subscribe({ state, bus }) {
 
 function view (props) {
     var { emit } = props
-    return <div>hello</div>
+    return <div>
+        hello
+        <button onClick={emit(EVENTS.hello.world)}>emit ev</button>
+    </div>
 }
 
 var { bus } = ok(state, view, el)
 
-// @TODO need to pass in the bus
 subscribe({ state, bus })
 
 if (process.env.NODE_ENV === 'development') {
     window.app = { state, bus, EVENTS }
 }
+
