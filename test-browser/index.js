@@ -8,9 +8,6 @@ function View (props) {
     return <div>view</div>
 }
 
-function sub ({ state, view }) {
-}
-
 var state = struct({
     hello: observ(null),
     route: observ(null)
@@ -18,9 +15,18 @@ var state = struct({
 
 var el = document.body
 
+var _view
 test('start', function (t) {
     var { view } = ok(state, View, el)
-    sub({ state, view })
+    _view = view
     t.ok(view, 'returns')
     t.end()
+})
+
+test('event', function (t) {
+    t.plan(1)
+    _view.on('foo', function (data) {
+        t.equal(data, 'bar')
+    })
+    _view.emit('foo', 'bar')
 })
