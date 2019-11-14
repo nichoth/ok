@@ -8,13 +8,13 @@ npm install @nichoth/ok
 
 ## example
 ```js
-var ok = require('../')
-var ns = require('@nichoth/events/namespace')
-var struct = require('observ-struct')
-var observ = require('observ')
-var EVENTS = ns({
+var EVENTS = require('@nichoth/events/namespace')({
     hello: ['world']
 })
+var { h } = require('preact')
+var ok = require('../')
+var struct = require('observ-struct')
+var observ = require('observ')
 
 var el = document.getElementById('content')
 var state = struct({
@@ -23,8 +23,17 @@ var state = struct({
 })
 
 function subscribe({ state, view }) {
-    view.on(EVENTS.hello.world, () => state.foo.set('bar'))
+    view.on(EVENTS.hello.world, () => state.foo.set('baz'))
 }
 
-var { bus } = ok(el, state, subscribe)
+function view (props) {
+    var { emit } = props
+    return <div>
+        hello {props.foo + ' '}
+        <button onClick={emit(EVENTS.hello.world)}>emit event</button>
+    </div>
+}
+
+var { view } = ok(state, view, el)
+subscribe({ state, view })
 ```
