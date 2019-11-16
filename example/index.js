@@ -23,19 +23,19 @@ router.addRoute('/', function foo (match) {
     }
 })
 
-function view (props) {
+function View (props) {
     var { emit } = props
     if (props.route.pathname) var m = router.match(props.route.pathname)
-    if (m) var RouteView = m.action(m) || null
+    if (m) var RouteView = m.action(m)
     return <div>
-        <RouteView  />
+        <RouteView  {...props} />
         <hr />
         hello {props.foo + ' '}
         <button onClick={emit(EVENTS.hello.world)}>emit event</button>
     </div>
 }
 
-var { view } = ok(state, view, document.getElementById('content'))
+var { view } = ok(state, View, document.getElementById('content'))
 subscribe({ state, view })
 
 if (process.env.NODE_ENV === 'development') {
