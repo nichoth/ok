@@ -28,7 +28,7 @@ function View (props) {
     if (props.route.pathname) var m = router.match(props.route.pathname)
     if (m) var RouteView = m.action(m)
     return <div>
-        <RouteView  {...props} />
+        <RouteView {...props} />
         <hr />
         hello {props.foo + ' '}
         <button onClick={emit(EVENTS.hello.world)}>emit event</button>
