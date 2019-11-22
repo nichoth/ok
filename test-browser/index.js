@@ -26,7 +26,7 @@ test('start', function (t) {
 test('event', function (t) {
     t.plan(1)
     _view.on('foo', function (data) {
-        t.equal(data, 'bar')
+        t.equal(data, 'bar', 'events')
     })
     _view.emit('foo', 'bar')
 })

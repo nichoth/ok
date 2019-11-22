@@ -19,6 +19,7 @@ function subscribe({ state, view }) {
 var router = Router()
 router.addRoute('/', function foo (match) {
     return function (props) {
+        console.log('props', props)
         return <div>foo</div>
     }
 })
