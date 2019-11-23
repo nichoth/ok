@@ -44,7 +44,7 @@
     "@nichoth/catch-routes": "^1.0.3",
     "@nichoth/events": "^1.1.2",
     "@nichoth/preact-connect": "^1.1.0",
-    "preact": "^8.2.9",
+    "preact": "^8.5.3",
     "ruta3": "^2.0.1"
   },
   "devDependencies": {
