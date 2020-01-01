@@ -10,8 +10,11 @@ function start (state, view, el) {
         state.route.set(parsedUrl)
     })
 
-    var _view = connect({ state, bus, view })
-    render(h(_view), el)
+    if (el) {
+        var _view = connect({ state, bus, view })
+        render(h(_view), el)
+    }
+
     return { state, view: bus }
 }
 

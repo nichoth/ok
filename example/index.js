@@ -28,6 +28,7 @@ function View (props) {
     var { emit } = props
     if (props.route.pathname) var m = router.match(props.route.pathname)
     if (m) var RouteView = m.action(m)
+
     return <div>
         <RouteView {...props} />
         <hr />
