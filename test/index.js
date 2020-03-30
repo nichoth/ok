@@ -18,9 +18,14 @@ var state = struct({
 
 var el = document.body
 
-test('example', function (t) {
+test('can call it', function (t) {
     var { view } = ok(state, sub, View, el)
     t.ok(view, 'returns')
     t.end()
 })
 
+test('routes', function (t) {
+    t.plan(1)
+    var { routes } = ok(state, View, el)
+    t.ok(routes, 'returns it')
+})

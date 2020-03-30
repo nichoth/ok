@@ -30,3 +30,10 @@ test('event', function (t) {
     })
     _view.emit('foo', 'bar')
 })
+
+test('routes', function (t) {
+    t.plan(1)
+    var { routes } = ok(state, View, el)
+    t.ok(routes, 'returns it')
+})
+

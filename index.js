@@ -5,9 +5,13 @@ var catchRoutes = require('@nichoth/catch-routes')
 
 function start (state, view, el) {
     var bus = Bus({ memo: true })
+    var onRoute = []
 
     catchRoutes(function (parsedUrl) {
         state.route.set(parsedUrl)
+        onRoute.forEach(function (handler) {
+            handler(parsedUrl)
+        })
     })
 
     if (el) {
@@ -15,7 +19,12 @@ function start (state, view, el) {
         render(h(_view), el)
     }
 
-    return { state, view: bus }
+    function routes (handler) {
+        onRoute.push(handler)
+    }
+
+    return { state, view: bus, routes }
 }
 
 module.exports = start
+
