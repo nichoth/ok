@@ -3,15 +3,12 @@ var connect = require('@nichoth/preact-connect')
 var Bus = require('@nichoth/events')
 var catchRoutes = require('@nichoth/catch-routes')
 
-function start (state, view, el) {
+function start (state, view, el, { onRoute } = {}) {
     var bus = Bus({ memo: true })
-    var onRoute = []
 
-    catchRoutes(function (parsedUrl) {
+    var { setRoute } = catchRoutes(function (parsedUrl) {
         state.route.set(parsedUrl)
-        onRoute.forEach(function (handler) {
-            handler(parsedUrl)
-        })
+        if (onRoute) onRoute(parsedUrl)
     })
 
     if (el) {
@@ -19,11 +16,7 @@ function start (state, view, el) {
         render(h(_view), el)
     }
 
-    function routes (handler) {
-        onRoute.push(handler)
-    }
-
-    return { state, view: bus, routes }
+    return { state, view: bus, setRoute }
 }
 
 module.exports = start

@@ -33,7 +33,11 @@ test('event', function (t) {
 
 test('routes', function (t) {
     t.plan(1)
-    var { routes } = ok(state, View, el)
-    t.ok(routes, 'returns it')
+    var onRoute = function (parsedRoute) {
+        t.equal(parsedRoute.href, '/', 'should callback with route')
+    }
+    var { setRoute } = ok(state, View, el, { onRoute })
+
+    setRoute('/')
 })
 
